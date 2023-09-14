@@ -1,0 +1,23 @@
+--- 
+- hosts: server-name
+  remote_user: ansible-user
+  become: true
+  gather_facts: no
+  tasks:
+  - name: Create SonarScanner directory
+    file:
+      path: /opt/sonar-scanner/
+      state: directory
+  - name: Download SonarScanner .zip
+    get_url:
+      url: "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip"
+      dest: "/opt/sonar-scanner/"
+  - name: Extract SonarScanner
+    unarchive:
+      src: "/opt/sonar-scanner/sonar-scanner-cli-4.8.0.2856-linux.zip"
+      dest: "/opt/sonar-scanner/"
+  - name: Delete .zip folder 
+    file: 
+      path: /opt/sonar-scanner/sonar-scanner-cli-4.8.0.2856-linux.zip
+      state: absent
+  
