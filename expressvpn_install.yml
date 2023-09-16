@@ -1,0 +1,14 @@
+---
+
+- hosts: [ubuntu]
+  become: 'yes'
+  vars_files:
+    - vars/expressvpn_vars.yml
+  tasks:
+   - name: Download ExpressVPN
+     ansible.builtin.get_url:
+       url: https://www.expressvpn.works/clients/linux/expressvpn_{{ expressvpn_vers }}_amd64.deb
+       dest: /home/gcotto/Downloads/expressvpn/
+       mode: '0440'
+   - name: Install new expressvpn version
+     command: sh /home/gcotto/bash/dpkg_expressvpn.sh
