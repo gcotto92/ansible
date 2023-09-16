@@ -20,4 +20,3 @@
     file: 
       path: /opt/sonar-scanner/sonar-scanner-cli-4.8.0.2856-linux.zip
       state: absent
-  
